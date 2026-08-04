@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedra Crom - Calculadora</title>
+  <style>
+    :root {
+      --bg-1: #07111f;
+      --bg-2: #0b1d33;
+      --card: rgba(14, 24, 40, 0.72);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: #9fb0c8;
+      --accent: #69d2ff;
+      --success: #68f0b5;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(105, 210, 255, 0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(138, 125, 255, 0.24), transparent 24%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .container { width: min(980px, 100%); }
+    .hero { text-align: center; margin-bottom: 24px; }
+    .hero h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.04em; }
+    .hero p { margin: 10px auto 0; max-width: 640px; color: var(--muted); line-height: 1.6; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(105, 210, 255, 0.12), transparent 40%, rgba(138, 125, 255, 0.12));
+      pointer-events: none;
+    }
+    .label { display: block; margin-bottom: 10px; color: var(--muted); font-size: 0.92rem; position: relative; z-index: 1; }
+    .stone-box { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; position: relative; z-index: 1; }
+    .stone-icon {
+      width: 60px;
+      height: 60px;
+      flex: 0 0 60px;
+      border-radius: 18px;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.04);
+    }
+    .stone-meta strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+    .stone-meta span { color: var(--muted); font-size: 0.95rem; }
+    .field { margin-top: 14px; position: relative; z-index: 1; }
+    input {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 12, 22, 0.55);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+    .result { display: grid; gap: 14px; }
+    .result .value { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--success); letter-spacing: -0.04em; }
+    .result .sub { color: var(--muted); line-height: 1.6; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(105, 210, 255, 0.12); color: var(--accent); font-size: 0.9rem; width: fit-content; position: relative; z-index: 1; }
+    .back {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--accent);
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>Pedra Crom</h1>
+      <p>Calcule o valor total dos clicks usando o valor base de 3.000.000 por unidade.</p>
+    </section>
+
+    <section class="cards">
+      <article class="card">
+        <span class="label">Pedra de Crom</span>
+        <div class="stone-box">
+          <img class="stone-icon" src="img/Pedra Cron.png" alt="Ícone da pedra de crom" />
+          <div class="stone-meta">
+            <strong>Valor unitário</strong>
+            <span>1 unidade = 3.000.000</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label" for="quantidadePedras">Quantidade de pedras de crom</span>
+          <input id="quantidadePedras" type="number" min="0" step="1" value="1" />
+        </div>
+
+        <div class="field">
+          <span class="label" for="quantidadeClicks">Quantidade de clicks</span>
+          <input id="quantidadeClicks" type="number" min="0" step="1" value="1" />
+        </div>
+      </article>
+
+      <article class="card result">
+        <span class="pill">Resultado em tempo real</span>
+        <div>
+          <span class="label">Valor total dos cliques</span>
+          <div class="value" id="valorTotal">R$ 3.000.000</div>
+        </div>
+        <p class="sub" id="resumo">1 pedra × 1 click × 3.000.000 = 3.000.000</p>
+      </article>
+    </section>
+
+    <a class="back" href="index.html">← Voltar ao menu</a>
+  </main>
+
+  <script>
+    const quantidadePedras = document.getElementById('quantidadePedras');
+    const quantidadeClicks = document.getElementById('quantidadeClicks');
+    const valorTotal = document.getElementById('valorTotal');
+    const resumo = document.getElementById('resumo');
+    const valorUnitario = 3000000;
+
+    function formatarMoeda(valor) {
+      return new Intl.NumberFormat('pt-BR').format(valor);
+    }
+
+    function formatarComEscala(valor) {
+      const abs = Math.abs(valor);
+      if (abs >= 1e12) return `${formatarMoeda(valor / 1e12)} trilhão`;
+      if (abs >= 1e9) return `${formatarMoeda(valor / 1e9)} bilhão`;
+      if (abs >= 1e6) return `${formatarMoeda(valor / 1e6)} milhão`;
+      return formatarMoeda(valor);
+    }
+
+    function atualizarCalculo() {
+      const pedras = Math.max(0, Number(quantidadePedras.value) || 0);
+      const clicks = Math.max(0, Number(quantidadeClicks.value) || 0);
+      const total = pedras * clicks * valorUnitario;
+      valorTotal.textContent = `R$ ${formatarMoeda(total)} (${formatarComEscala(total)})`;
+      resumo.textContent = `${pedras} pedra${pedras === 1 ? '' : 's'} × ${clicks} click${clicks === 1 ? '' : 's'} × ${formatarMoeda(valorUnitario)} = ${formatarMoeda(total)} (${formatarComEscala(total)})`;
+    }
+
+    quantidadePedras.addEventListener('input', atualizarCalculo);
+    quantidadeClicks.addEventListener('input', atualizarCalculo);
+    atualizarCalculo();
+  </script>
+</body>
+</html>
