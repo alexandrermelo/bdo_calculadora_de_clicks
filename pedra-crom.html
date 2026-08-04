@@ -159,9 +159,10 @@
     function atualizarCalculo() {
       const pedras = Math.max(0, Number(quantidadePedras.value) || 0);
       const clicks = Math.max(0, Number(quantidadeClicks.value) || 0);
+      const totalPedras = pedras * clicks;
       const total = pedras * clicks * valorUnitario;
       valorTotal.textContent = `R$ ${formatarMoeda(total)} (${formatarComEscala(total)})`;
-      resumo.textContent = `${pedras} pedra${pedras === 1 ? '' : 's'} × ${clicks} click${clicks === 1 ? '' : 's'} × ${formatarMoeda(valorUnitario)} = ${formatarMoeda(total)} (${formatarComEscala(total)})`;
+      resumo.textContent = `${pedras} pedra${pedras === 1 ? '' : 's'} × ${clicks} click${clicks === 1 ? '' : 's'} = ${totalPedras} pedra${totalPedras === 1 ? '' : 's'} no total. Valor: ${formatarMoeda(total)} (${formatarComEscala(total)})`;
     }
 
     quantidadePedras.addEventListener('input', atualizarCalculo);
