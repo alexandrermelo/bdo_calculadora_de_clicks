@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pedra Crom - Calculadora</title>
+  <title>Pedra Cron - Calculadora</title>
   <style>
     :root {
       --bg-1: #07111f;
@@ -98,15 +98,15 @@
 <body>
   <main class="container">
     <section class="hero">
-      <h1>Pedra Crom</h1>
-      <p>Calcule o valor total dos clicks usando o valor base de 3.000.000 por unidade.</p>
+      <h1>Pedra Cron</h1>
+      <p>Calcule o valor total dos cliques usando o valor base de 3.000.000 por unidade.</p>
     </section>
 
     <section class="cards">
       <article class="card">
-        <span class="label">Pedra de Crom</span>
+        <span class="label">Pedra de Cron</span>
         <div class="stone-box">
-          <img class="stone-icon" src="img/Pedra Cron.png" alt="Ícone da pedra de crom" />
+          <img class="stone-icon" src="img/Pedra Cron.png" alt="Ícone da pedra de cron" />
           <div class="stone-meta">
             <strong>Valor unitário</strong>
             <span>1 unidade = 3.000.000</span>
@@ -114,12 +114,12 @@
         </div>
 
         <div class="field">
-          <span class="label" for="quantidadePedras">Quantidade de pedras de crom</span>
+          <span class="label" for="quantidadePedras">Quantidade de pedras de cron</span>
           <input id="quantidadePedras" type="number" min="0" step="1" value="1" />
         </div>
 
         <div class="field">
-          <span class="label" for="quantidadeClicks">Quantidade de clicks</span>
+          <span class="label" for="quantidadeClicks">Quantidade de cliques</span>
           <input id="quantidadeClicks" type="number" min="0" step="1" value="1" />
         </div>
       </article>
@@ -130,7 +130,7 @@
           <span class="label">Valor total dos cliques</span>
           <div class="value" id="valorTotal">R$ 3.000.000</div>
         </div>
-        <p class="sub" id="resumo">1 pedra × 1 click × 3.000.000 = 3.000.000</p>
+        <p class="sub" id="resumo">1 pedra × 1 clique × 3.000.000 = 3.000.000</p>
       </article>
     </section>
 
@@ -162,7 +162,7 @@
       const totalPedras = pedras * clicks;
       const total = pedras * clicks * valorUnitario;
       valorTotal.textContent = `R$ ${formatarMoeda(total)} (${formatarComEscala(total)})`;
-      resumo.textContent = `${pedras} pedra${pedras === 1 ? '' : 's'} × ${clicks} click${clicks === 1 ? '' : 's'} = ${totalPedras} pedra${totalPedras === 1 ? '' : 's'} no total. Valor: ${formatarMoeda(total)} (${formatarComEscala(total)})`;
+      resumo.textContent = `${pedras} pedra${pedras === 1 ? '' : 's'} × ${clicks} clique${clicks === 1 ? '' : 's'} = ${totalPedras} pedra${totalPedras === 1 ? '' : 's'} no total. Valor: ${formatarMoeda(total)} (${formatarComEscala(total)})`;
     }
 
     quantidadePedras.addEventListener('input', atualizarCalculo);

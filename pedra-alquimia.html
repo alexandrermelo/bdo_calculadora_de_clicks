@@ -16,9 +16,7 @@
       --success: #68f0b5;
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -32,12 +30,10 @@
       place-items: center;
       padding: 24px;
     }
-
     .container { width: min(980px, 100%); }
     .hero { text-align: center; margin-bottom: 24px; }
     .hero h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.04em; }
     .hero p { margin: 10px auto 0; max-width: 640px; color: var(--muted); line-height: 1.6; }
-
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
     .stack { display: grid; gap: 18px; }
     .card {
@@ -82,11 +78,7 @@
       font-size: 1rem;
       outline: none;
     }
-    .result { display: grid; gap: 14px; }
-    .result {
-      min-width: min(100%, 420px);
-      width: 100%;
-    }
+    .result { display: grid; gap: 14px; min-width: min(100%, 420px); width: 100%; }
     .result .value {
       font-size: clamp(1.5rem, 4vw, 2.6rem);
       font-weight: 700;
@@ -98,44 +90,36 @@
     }
     .result .sub { color: var(--muted); line-height: 1.6; }
     .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(105, 210, 255, 0.12); color: var(--accent); font-size: 0.9rem; width: fit-content; position: relative; z-index: 1; }
-    .back {
-      display: inline-block;
-      margin-top: 18px;
-      color: var(--accent);
-      text-decoration: none;
-      position: relative;
-      z-index: 1;
-    }
+    .back { display: inline-block; margin-top: 18px; color: var(--accent); text-decoration: none; position: relative; z-index: 1; }
   </style>
 </head>
 <body>
   <main class="container">
     <section class="hero">
       <h1>Pedra de Alquimia upgrade</h1>
-      <p>Escolha o fragmento, informe o valor e a quantidade, e veja o total calculado na hora.</p>
+      <p>Escolha o fragmento, informe a quantidade e veja o total calculado na hora.</p>
     </section>
 
     <section class="cards">
       <article class="card">
-        <span class="label">Menu de clicks</span>
+        <span class="label">Menu de cliques</span>
         <div class="field">
-          <span class="label" for="quantidadeClicks">Quantidade de clicks</span>
+          <span class="label" for="quantidadeClicks">Quantidade de cliques</span>
           <input id="quantidadeClicks" type="number" min="0" step="1" value="1" />
         </div>
       </article>
 
       <div class="stack">
         <article class="card">
-          <span class="label">Quantidade por clicks</span>
+          <span class="label">Quantidade por cliques</span>
           <div class="stone-box">
             <img class="stone-icon" src="img/Essência Celestial Abundante.png" alt="Ícone da Essência Celestial Abundante" />
             <div class="stone-meta">
               <strong>Essência Celestial Abundante</strong>
             </div>
           </div>
-
           <div class="field">
-            <span class="label" for="essenciaCelestialQuantidade">Quantidade por click</span>
+            <span class="label" for="essenciaCelestialQuantidade">Quantidade por clique</span>
             <input id="essenciaCelestialQuantidade" type="number" min="0" step="1" value="1" />
           </div>
         </article>
@@ -148,7 +132,6 @@
               <strong>Fragmento afiado de cristal negro</strong>
             </div>
           </div>
-
           <div class="field">
             <span class="label" for="valorUnitario">Valor do item</span>
             <input id="valorUnitario" type="text" inputmode="numeric" pattern="[0-9.]*" value="0" />
@@ -162,7 +145,7 @@
             <div class="stone-meta">
               <strong>Fragmento da Lua Minguante de Okilua</strong>
               <span>Valor unitário: 50.000.000</span>
-              <span>Pode ser comprado com Gerente de Lua Minguante em cada cidade disponivel.</span>
+              <span>Pode ser comprado com o Gerente de Lua Minguante em cada cidade disponível.</span>
             </div>
           </div>
         </article>
@@ -170,23 +153,20 @@
 
       <article class="card result">
         <span class="pill">Resultado em tempo real</span>
-
         <div>
           <span class="label">Total do Fragmento afiado de cristal negro</span>
           <div class="value" id="valorTotalFragmento">0</div>
-          <p class="sub" id="resumoFragmento">0 × 0 = 0</p>
+          <p class="sub" id="resumoFragmento">Essência = 0 | Fragmento afiado = 0</p>
         </div>
-
         <div>
           <span class="label">Total do Fragmento da Lua Minguante de Okilua</span>
           <div class="value" id="valorTotalLua">0</div>
-          <p class="sub" id="resumoLua">0 × 0 = 0</p>
+          <p class="sub" id="resumoLua">Essência = 0 | Fragmento da lua = 0</p>
         </div>
-
         <div>
           <span class="label">Total da Essência Celestial Abundante</span>
           <div class="value" id="valorTotalCelestial">0</div>
-          <p class="sub" id="resumoCelestial">0 × 0 = 0</p>
+          <p class="sub" id="resumoCelestial">Essência = 0</p>
         </div>
       </article>
     </section>
@@ -223,10 +203,7 @@
 
     function formatarValorDigitado(texto) {
       const somenteNumeros = limparNumero(texto);
-      if (!somenteNumeros) {
-        return '0';
-      }
-      return formatarNumero(Number(somenteNumeros));
+      return somenteNumeros ? formatarNumero(Number(somenteNumeros)) : '0';
     }
 
     function atualizarCalculo() {
@@ -236,10 +213,8 @@
       const quantidadeFragmento = quantidadeCelestial * 20;
       const quantidadeLua = quantidadeCelestial * 2;
       const valorLua = 50000000;
-      const totalFragmentoBase = valor * quantidadeFragmento;
-      const totalLuaBase = valorLua * quantidadeLua;
-      const totalFragmento = totalFragmentoBase * clicks;
-      const totalLua = totalLuaBase * clicks;
+      const totalFragmento = valor * quantidadeFragmento * clicks;
+      const totalLua = valorLua * quantidadeLua * clicks;
       const totalCelestial = quantidadeCelestial * clicks;
 
       valorTotalFragmento.textContent = `${formatarNumero(totalFragmento)} (${formatarComEscala(totalFragmento)})`;

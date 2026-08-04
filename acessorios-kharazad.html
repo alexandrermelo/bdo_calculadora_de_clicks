@@ -123,22 +123,22 @@
   <main class="container">
     <section class="hero">
       <h1>Acessórios Kharazad</h1>
-      <p>Calcule separadamente a Pedra Crom e a Essência da Madrugada com seus próprios valores finais.</p>
+      <p>Calcule separadamente a Pedra Cron e a Essência da Madrugada com seus próprios valores finais.</p>
     </section>
 
     <section class="card" style="margin-bottom:18px;">
-      <span class="label">Quantidade de clicks</span>
+      <span class="label">Quantidade de cliques</span>
       <div class="field">
-        <span class="label" for="kharazadClicks">Clicks usados</span>
+        <span class="label" for="kharazadClicks">Cliques usados</span>
         <input id="kharazadClicks" type="number" min="0" step="1" value="1" />
       </div>
     </section>
 
     <section class="grid">
       <article class="card">
-        <span class="label">Pedra Crom</span>
+        <span class="label">Pedra Cron</span>
         <div class="stone-box">
-          <img class="stone-icon" src="img/Pedra Cron.png" alt="Ícone da Pedra Crom" />
+          <img class="stone-icon" src="img/Pedra Cron.png" alt="Ícone da Pedra Cron" />
           <div class="stone-meta">
             <strong>Valor fixo</strong>
             <span>1 unidade = 3.000.000</span>
@@ -155,7 +155,7 @@
         <div class="stone-box">
           <img class="stone-icon" src="img/Essência da Madrugada.png" alt="Ícone da Essência da Madrugada" />
           <div class="stone-meta">
-            <strong>Informativo do item</strong>
+            <strong>Valor de mercado</strong>
             <span>Digite o valor e a quantidade para calcular</span>
           </div>
         </div>
@@ -174,7 +174,7 @@
       <span class="pill">Resultado em tempo real</span>
       <div class="summary-grid">
         <div class="summary-card">
-          <span class="label">Valor final da Pedra Crom</span>
+          <span class="label">Valor final da Pedra Cron</span>
           <div class="value" id="resultadoPedra">R$ 3.000.000</div>
           <p class="sub" id="resumoPedra">1 × 3.000.000 = 3.000.000</p>
         </div>
@@ -192,14 +192,13 @@
 
   <script>
     const kharazadPedras = document.getElementById('kharazadPedras');
-      const resultadoPedra = document.getElementById('resultadoPedra');
-      const resumoPedra = document.getElementById('resumoPedra');
+    const resultadoPedra = document.getElementById('resultadoPedra');
+    const resumoPedra = document.getElementById('resumoPedra');
     const kharazadClicks = document.getElementById('kharazadClicks');
     const essenciaValor = document.getElementById('essenciaValor');
     const essenciaQuantidade = document.getElementById('essenciaQuantidade');
     const resultadoEssencia = document.getElementById('resultadoEssencia');
     const resumoEssencia = document.getElementById('resumoEssencia');
-    const totalGeral = document.createElement('div');
     const pedraUnitaria = 3000000;
 
     function formatarNumero(valor) {
