@@ -126,6 +126,21 @@
 
       <div class="stack">
         <article class="card">
+          <span class="label">Quantidade por clicks</span>
+          <div class="stone-box">
+            <img class="stone-icon" src="img/Essência Celestial Abundante.png" alt="Ícone da Essência Celestial Abundante" />
+            <div class="stone-meta">
+              <strong>Essência Celestial Abundante</strong>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label" for="essenciaCelestialQuantidade">Quantidade por click</span>
+            <input id="essenciaCelestialQuantidade" type="number" min="0" step="1" value="1" />
+          </div>
+        </article>
+
+        <article class="card">
           <span class="label">Fragmento afiado de cristal negro</span>
           <div class="stone-box">
             <img class="stone-icon" src="img/Fragmento Afiado de Cristal Negro.png" alt="Ícone do fragmento afiado de cristal negro" />
@@ -167,6 +182,12 @@
           <div class="value" id="valorTotalLua">0</div>
           <p class="sub" id="resumoLua">0 × 0 = 0</p>
         </div>
+
+        <div>
+          <span class="label">Total da Essência Celestial Abundante</span>
+          <div class="value" id="valorTotalCelestial">0</div>
+          <p class="sub" id="resumoCelestial">0 × 0 = 0</p>
+        </div>
       </article>
     </section>
 
@@ -176,10 +197,13 @@
   <script>
     const valorUnitario = document.getElementById('valorUnitario');
     const quantidadeClicks = document.getElementById('quantidadeClicks');
+    const essenciaCelestialQuantidade = document.getElementById('essenciaCelestialQuantidade');
     const valorTotalFragmento = document.getElementById('valorTotalFragmento');
     const resumoFragmento = document.getElementById('resumoFragmento');
     const valorTotalLua = document.getElementById('valorTotalLua');
     const resumoLua = document.getElementById('resumoLua');
+    const valorTotalCelestial = document.getElementById('valorTotalCelestial');
+    const resumoCelestial = document.getElementById('resumoCelestial');
 
     function formatarNumero(valor) {
       return new Intl.NumberFormat('pt-BR').format(valor);
@@ -208,20 +232,27 @@
     function atualizarCalculo() {
       const valor = Math.max(0, Number(limparNumero(valorUnitario.value)) || 0);
       const clicks = Math.max(0, Number(quantidadeClicks.value) || 0);
-      const quantidadeFragmento = clicks * 20;
-      const quantidadeLua = clicks * 2;
+      const quantidadeCelestial = Math.max(0, Number(essenciaCelestialQuantidade.value) || 0);
+      const quantidadeFragmento = quantidadeCelestial * 20;
+      const quantidadeLua = quantidadeCelestial * 2;
       const valorLua = 50000000;
-      const totalFragmento = valor * quantidadeFragmento;
-      const totalLua = valorLua * quantidadeLua;
+      const totalFragmentoBase = valor * quantidadeFragmento;
+      const totalLuaBase = valorLua * quantidadeLua;
+      const totalFragmento = totalFragmentoBase * clicks;
+      const totalLua = totalLuaBase * clicks;
+      const totalCelestial = quantidadeCelestial * clicks;
 
       valorTotalFragmento.textContent = `${formatarNumero(totalFragmento)} (${formatarComEscala(totalFragmento)})`;
-      resumoFragmento.textContent = `${formatarNumero(valor)} × ${quantidadeFragmento} = ${formatarNumero(totalFragmento)} (${formatarComEscala(totalFragmento)})`;
+      resumoFragmento.textContent = `Essência = ${formatarNumero(totalCelestial)} | Fragmento afiado = ${formatarNumero(quantidadeFragmento * clicks)}`;
       valorTotalLua.textContent = `${formatarNumero(totalLua)} (${formatarComEscala(totalLua)})`;
-      resumoLua.textContent = `${formatarNumero(valorLua)} × ${quantidadeLua} = ${formatarNumero(totalLua)} (${formatarComEscala(totalLua)})`;
+      resumoLua.textContent = `Essência = ${formatarNumero(totalCelestial)} | Fragmento da lua = ${formatarNumero(quantidadeLua * clicks)}`;
+      valorTotalCelestial.textContent = `${formatarNumero(totalCelestial)} (${formatarComEscala(totalCelestial)})`;
+      resumoCelestial.textContent = `Essência = ${formatarNumero(totalCelestial)}`;
     }
 
     valorUnitario.addEventListener('input', atualizarCalculo);
     quantidadeClicks.addEventListener('input', atualizarCalculo);
+    essenciaCelestialQuantidade.addEventListener('input', atualizarCalculo);
     valorUnitario.addEventListener('input', () => {
       const posicaoFinal = valorUnitario.value.length;
       valorUnitario.value = formatarValorDigitado(valorUnitario.value);
